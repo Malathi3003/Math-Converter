@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+	<link rel="stylesheet" href="../style.css" type="text/css" />
+	<title>COmpumath - digital unit converter</title>
+</head>
+<body>
+	<header class="Header">
+		<h1 class="Header-h1"> <a class="Back" href="../index.html"><</a> Digital unit converter</h1>
+	</header>
+
+	<main class="Main">
+		<input type="number" onkeyup="convert();" step="1" min="2" max="10000000000" id="source" value="1024" name="source" placeholder="1024" />
+		<select name="unite_i" id="unite_i" onchange="convert();">
+			<option value="o">o (octet)</option>
+			<option value="k" selected>ko (kilooctet)</option>
+			<option value="ki">kio (kibioctet)</option>
+			<option value="m">Mo (mégaoctet)</option>
+			<option value="mi">Mio (mébioctet)</option>
+			<option value="g">Go (gigaoctet)</option>
+			<option value="gi">Gio (gibioctet)</option>
+			<option value="t">To (téraoctet)</option>
+			<option value="ti">Tio (tebioctet)</option>
+		</select>
+
+		<button class="Button" onclick="convert();">Convert</button>
+
+		<h2>1mo = 1000o</h2>
+		<table class="all_units Result">
+			<tr>
+				<td>
+					<input readonly type="text" id="o"/>
+					<label for="o">o</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input readonly type="text" id="k"/>
+					<label for="k">ko</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input readonly type="text" id="m"/>
+					<label for="m">Mo</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input readonly type="text" id="g"/>
+					<label for="g">Go</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input readonly type="text" id="t"/>
+					<label for="t">To</label>
+				</td>
+			</tr>
+		</table>
+		<h2>1mo = 1024o</h2>
+		<table class="all_units Result">
+			<tr>
+
+				<td>
+					<input readonly type="text" id="ki"/>
+					<label for="ki">kio</label>
+				</td>
+			</tr>
+			<tr>
+
+				<td>
+					<input readonly type="text" id="mi"/>
+					<label for="mi">Mio</label>
+				</td>
+			</tr>
+			<tr>
+
+				<td>
+					<input readonly type="text" id="gi"/>
+					<label for="gi">Gio</label>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input readonly type="text" id="ti"/>
+					<label for="ti">Tio</label>
+				</td>
+			</tr>
+		</table>
+
+		<aside class="note">
+			<p style="text-align:left;">
+			1&nbsp;To =<br> 1&thinsp;000&nbsp;Go =<br> 1&thinsp;000&thinsp;000&nbsp;Mo =<br> 1&thinsp;000&thinsp;000&thinsp;000&nbsp;ko =<br> 1&thinsp;000&thinsp;000&thinsp;000&thinsp;000&nbsp;o
+			</p>
+			<p style="text-align:left;">
+			1&nbsp;Tio =<br> 1&thinsp;024&nbsp;Gio =<br> 1&thinsp;048&thinsp;576&nbsp;Mio =<br> 1&thinsp;073&thinsp;741&thinsp;824&nbsp;kio =<br> 1&thinsp;099&thinsp;511&thinsp;627&thinsp;776&nbsp;o
+			</p>
+		</aside>
+
+	</main>
+
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		function convert() {
+			var nombre_i = document.getElementById('source').value;
+			var unite_i = document.getElementById('unite_i').value;
+			var nombre_f_o = 0;
+
+			// switch en octets pour commencer.
+			switch(unite_i) {
+				case 'o':  nombre_f_o = nombre_i;break;
+				case 'k':  nombre_f_o = nombre_i*1000; break;
+				case 'm':  nombre_f_o = nombre_i*1000*1000; break;
+				case 'g':  nombre_f_o = nombre_i*1000*1000*1000; break;
+				case 't':  nombre_f_o = nombre_i*1000*1000*1000*1000; break;
+				case 'ki': nombre_f_o = nombre_i*1024; break;
+				case 'mi': nombre_f_o = nombre_i*1024*1024; break;
+				case 'gi': nombre_f_o = nombre_i*1024*1024*1024; break;
+				case 'ti': nombre_f_o = nombre_i*1024*1024*1024*1024; break;
+			}
+
+			document.getElementById('o').value = nombre_f_o;
+			document.getElementById('k').value = String(parseFloat((nombre_f_o/1000).toFixed(12))).replace(/\./g, ',');
+			document.getElementById('m').value = String(parseFloat((nombre_f_o/1000/1000).toFixed(12))).replace(/\./g, ',');
+			document.getElementById('g').value = String(parseFloat((nombre_f_o/1000/1000/1000).toFixed(12))).replace(/\./g, ',');
+			document.getElementById('t').value = String(parseFloat((nombre_f_o/1000/1000/1000/1000).toFixed(12))).replace(/\./g, ',');
+			document.getElementById('ki').value = String(parseFloat((nombre_f_o/1024).toFixed(12))).replace(/\./g, ',');
+			document.getElementById('mi').value = String(parseFloat((nombre_f_o/1024/1024).toFixed(12))).replace(/\./g, ',');
+			document.getElementById('gi').value = String(parseFloat((nombre_f_o/1024/1024/1024).toFixed(12))).replace(/\./g, ',');
+			document.getElementById('ti').value = String(parseFloat((nombre_f_o/1024/1024/1024/1024).toFixed(12))).replace(/\./g, ',');
+
+			return false;
+		}
+		convert();
+		/* ]]> */
+	</script>
+</body>
+</html>
