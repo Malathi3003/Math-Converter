@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="initial-scale=1.0, user-scalable=yes" />
+	<link rel="stylesheet" href="../style.css" type="text/css" />
+	<title>Compumath - random number</title>
+</head>
+<body>
+	<header class="Header">
+		<h1 class="Header-h1"> <a class="Back" href="../index.html"><</a> Random number</h1>
+	</header>
+
+	<main class="Main">
+		<label for="min">Max&nbsp;: </label>
+		<input type="number" id="min" name="min" min="0" step="1" value="1" />
+
+		<label for="min">Min&nbsp;: </label>
+		<input type="number" id="max" name="max" min="0" step="1" value="10" />
+
+		<button onclick="randomize()" class="Button">Generate</button>
+		<div id="output" class="Result"></div>
+	</main>
+
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var nbLancer = 0;
+		function randomize() {
+			var min = document.getElementById('min').value;
+			var max = document.getElementById('max').value;
+			var rand = Math.floor(Math.min(min, max) + Math.random()*Math.abs(min-max));
+			document.getElementById('output').innerHTML = rand;
+			document.getElementById('output').style.fontSize = '2em';
+			nbLancer++;
+		}
+		randomize();
+		/* ]]> */
+	</script>
+</body>
+</html>
